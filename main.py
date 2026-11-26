@@ -41,6 +41,12 @@ def main() -> int:
         print("entry must be a single line with no surrounding whitespace",
               file=sys.stderr)
         return 1
+    if len(text.encode("utf-8")) != len(text):
+        # Keep characters == bytes: the leaderboard tie-break is by size
+        # in bytes, and non-ASCII would make the two counts disagree.
+        print("entry must be plain ASCII so its byte size equals its length",
+              file=sys.stderr)
+        return 1
 
     path = target_path()
     os.makedirs(os.path.dirname(path), exist_ok=True)
