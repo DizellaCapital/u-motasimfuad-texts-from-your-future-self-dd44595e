@@ -60,7 +60,10 @@ def main() -> int:
               file=sys.stderr)
         return 1
 
-    print(f"wrote {len(text)} characters to {path}")
+    print(
+        f"wrote {len(text)} characters "
+        f"({len(text.encode('utf-8'))} bytes) to {path}"
+    )
     return 0
 
 
